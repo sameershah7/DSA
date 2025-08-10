@@ -4,3 +4,16 @@ There exist different sorting algorithms for different types of inputs, for exam
 The algorithms may also differ according to output requirements. For example, stable sorting (or maintains original order of equal elements) or not stable.
 
 Sorting is provided in library implementation of most of the programming languages. These sorting functions typically are general purpose functions with flexibility of providing the expected sorting order (increasing or decreasing or by a specific key in case of objects).
+
+Types of Sorting Techniques
+
+There are various sorting algorithms are used in data structures. The following two types of sorting algorithms can be broadly classified:
+
+Comparison-based: We compare the elements in a comparison-based sorting algorithm
+Non-comparison-based: We do not compare the elements in a non-comparison-based sorting algorithm
+
+Basics Sorting Algorithms:
+1. Bubble Sort - O(n^2) Time and O(1) Space
+2. Insertion Sort - O(n^2) Time and O(1) Space
+3. Selection Sort - O(n^2) Time and O(1) Space
+4. Counting Sort
