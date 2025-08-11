@@ -1,0 +1,9 @@
+Introduction:
+Hashing refers to the process of generating a small sized output (that can be used as index in a table) from an input of typically large and variable size. Hashing uses mathematical formulas known as hash functions to do the transformation. This technique determines an index or location for the storage of an item in a data structure called Hash Table.
+
+Components of Hashing:
+There are majorly three components of hashing:
+
+Key: A Key can be anything string or integer which is fed as input in the hash function the technique that determines an index or location for storage of an item in a data structure.
+Hash Function: Receives the input key and returns the index of an element in an array called a hash table. The index is known as the hash index .
+Hash Table: Hash table is typically an array of lists. It stores values corresponding to the keys. Hash stores the data in an associative manner in an array where each data value has its own unique index.
