@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "book.h"   
+#include "book.h"
 #include "utils.h"
 
 using namespace std;
@@ -46,7 +46,6 @@ int main()
         cout << "Enter choice: ";
         cin >> choice;
 
-        int id, idx;
         switch (choice)
         {
         case 1:
@@ -57,11 +56,12 @@ int main()
             break;
         case 3:
         {
+            int id;
             cout << "Search by id: ";
             cin >> id;
-            idx = linearSearch(library, id);
+            int idx = linearSearch(library, id);
             if (idx != -1)
-                cout << "Book title: " << library[idx].title << " by " << library[idx].author << "\n";
+                cout << "Title: " << library[idx].title << " by: " << library[idx].author << "\n";
             else
                 cout << "Not found\n";
             break;

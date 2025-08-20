@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "book.h"
+#include "utils.cpp"
 
 using namespace std;
 
