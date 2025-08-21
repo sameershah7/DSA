@@ -6,4 +6,6 @@
 using namespace std;
 
 // Function declarations
-int linearSearch(vector<Book>& library, int id);
+void addBook(vector<Book> &library);
+void displayBooks(vector<Book> &library);
+int linearSearch(vector<Book> &library, int id);

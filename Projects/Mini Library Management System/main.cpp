@@ -5,33 +5,14 @@
 
 using namespace std;
 
-vector<Book> library; // storage for books
+// Predefined dataset in vector
+vector<Book> library = {
+    {1, "The C++ Programming Language", "Bjarne Stroustrup", 2013},
+    {2, "Effective Modern C++", "Scott Meyers", 2014},
+    {3, "Clean Code", "Robert C. Martin", 2008},
+    {4, "Design Patterns", "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides", 1994},
+    {5, "Introduction to Algorithms", "Thomas H. Cormen", 2009}};
 
-void addBook()
-{
-    Book b;
-    cout << "Enter Book ID: ";
-    cin >> b.id;
-    cin.ignore();
-    cout << "Enter Title: ";
-    getline(cin, b.title);
-    cout << "Enter Author: ";
-    getline(cin, b.author);
-    cout << "Enter Year: ";
-    cin >> b.year;
-
-    library.push_back(b);
-    cout << "Book added successfully!\n";
-}
-
-void displayBooks()
-{
-    cout << "\nLibrary Collection:\n";
-    for (auto &b : library)
-    {
-        cout << b.id << " | " << b.title << " | " << b.author << " | " << b.year << "\n";
-    }
-}
 
 int main()
 {
@@ -49,10 +30,10 @@ int main()
         switch (choice)
         {
         case 1:
-            addBook();
+            addBook(library);
             break;
         case 2:
-            displayBooks();
+            displayBooks(library);
             break;
         case 3:
         {
