@@ -182,6 +182,30 @@ Node *deleteNodePos(Node *head, int position)
     return head;
 }
 
+// Given the head of a list, reverse the list and return the head of reversed list
+Node *reverseList(Node *head)
+{
+    // Initialize three pointer curr, prev and next
+    Node *curr = head, *prev = nullptr, *next;
+
+    // Traverse all the node of linked list
+    while (curr != nullptr)
+    {
+        // Store next
+        next = curr->next;
+
+        //Reverse current node's next pointer
+        curr->next = prev;
+
+        // Move pointer one position ahead
+        prev = curr;
+        curr = next;
+    }
+
+    //return the head of the current linked list 
+    return prev;
+}
+
 int main()
 {
 
@@ -204,7 +228,8 @@ int main()
     // insertPos(head, position, key);
     // head = deleteHead(head);
     // head = deleteLastNode(head);
-    head = deleteNodePos(head, position);
+    // head = deleteNodePos(head, position);
+    head = reverseList(head);
 
     cout << "List after modify: " << endl;
     traverseList(head);
