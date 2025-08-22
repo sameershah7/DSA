@@ -48,6 +48,7 @@ Node *insertAtFront(Node *head, int new_data)
     return new_node;
 }
 
+// Function to insert a new node at the end of the list
 Node *insertAtEnd(Node *head, int new_data)
 {
     Node *new_node = new Node(new_data);
@@ -97,6 +98,90 @@ Node *insertPos(Node *head, int pos, int new_data)
     return head;
 }
 
+// Delete the head node and return the new head
+Node *deleteHead(Node *head)
+{
+    if (head == nullptr)
+        return nullptr;
+
+    // Store the current head in the temporary variable
+    Node *temp = head;
+
+    // Move the next pointer to the next node
+    head = head->next;
+
+    // free the memory of the old node
+    delete temp;
+    return head;
+}
+
+// Function to remove the last node of the linked list
+Node *deleteLastNode(Node *head)
+{
+    if (head == nullptr)
+        return nullptr;
+
+    // check if the list is One node
+    if (head->next == nullptr)
+    {
+        delete head;
+        return nullptr;
+    }
+
+    // Find the last node
+    Node *second_last = head;
+    while (second_last->next->next != nullptr)
+    {
+        second_last = second_last->next;
+    }
+
+    // Deleted the last node
+    delete second_last->next;
+
+    // Change next of second last
+    second_last->next = nullptr;
+
+    return head;
+}
+
+// Function to delete a node at a given position
+Node *deleteNodePos(Node *head, int position)
+{
+    Node *prev;
+    Node *temp = head;
+
+    if (temp == NULL)
+        return head;
+
+    if (position == 1)
+    {
+        head = temp->next;
+        free(temp);
+        return head;
+    }
+
+    // Node to be deleted is in middle Traverse till given position
+    for (int i = 1; i != position; i++)
+    {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    // If the position is fond then delete node
+    if (temp != NULL)
+    {
+        prev->next = temp->next;
+        free(temp);
+    }
+    // If given position is not present
+    else
+    {
+        cout << "Data not present\n";
+    }
+
+    return head;
+}
+
 int main()
 {
 
@@ -108,12 +193,20 @@ int main()
 
     int key = 11;
     int insVal = 12;
+    int position = 3;
+
+    cout << "Original list: " << endl;
+    traverseList(head);
 
     // cout << "Seachin key: " << searchKey(head, key);
     // head = insertAtFront(head, insVal);
     // head = insertAtEnd(head, insVal);
-    insertPos(head, 4, key);
+    // insertPos(head, position, key);
+    // head = deleteHead(head);
+    // head = deleteLastNode(head);
+    head = deleteNodePos(head, position);
 
+    cout << "List after modify: " << endl;
     traverseList(head);
 
     return 0;
