@@ -51,8 +51,9 @@ Node *insertAtFront(Node *head, int new_data)
 Node *insertAtEnd(Node *head, int new_data)
 {
     Node *new_node = new Node(new_data);
-    
-    if (head == nullptr) return new_node;
+
+    if (head == nullptr)
+        return new_node;
 
     Node *last = head;
 
@@ -60,9 +61,40 @@ Node *insertAtEnd(Node *head, int new_data)
         last->next = last;
 
     last->next = new_node;
-    
-    return head;
 
+    return head;
+}
+
+// function to insert a Node at required position
+Node *insertPos(Node *head, int pos, int new_data)
+{
+    if (pos < 1)
+        return head;
+
+    // head will change if pos=1
+    if (pos == 1)
+    {
+        Node *newNode = new Node(new_data);
+        newNode->next = head;
+        return newNode;
+    }
+
+    Node *curr = head;
+
+    for (int i = 1; i < pos - 1 && curr != NULL; i++)
+    {
+        curr = curr->next;
+    }
+    if (curr == nullptr)
+        return head;
+
+    Node *newNode = new Node(new_data);
+
+    // update the next pointers
+    newNode->next = curr->next;
+    curr->next = newNode;
+
+    return head;
 }
 
 int main()
@@ -74,12 +106,14 @@ int main()
     head->next->next->next = new Node(16);
     head->next->next->next->next = new Node(18);
 
-    int key = 10;
+    int key = 11;
     int insVal = 12;
 
-    cout <<"Seachin key: "<< searchKey(head, key);
-    head = insertAtFront(head, insVal);
-    head = insertAtEnd(head, insVal);
+    // cout << "Seachin key: " << searchKey(head, key);
+    // head = insertAtFront(head, insVal);
+    // head = insertAtEnd(head, insVal);
+    insertPos(head, 4, key);
+
     traverseList(head);
 
     return 0;
