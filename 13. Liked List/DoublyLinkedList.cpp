@@ -148,6 +148,50 @@ Node *insertBefore(Node *head, int key, int new_data)
     return head;
 }
 
+// Function to insert a new node at a given position
+Node *insertAtPosition(Node *head, int pos, int new_data)
+{
+    // Create a new node
+    Node *new_node = new Node(new_data);
+
+    // insertion at the beginning
+    if (pos == 1)
+    {
+        new_node->next = head;
+
+        // If the linked list is not empty, set the prev of head to new node
+        if (head != NULL)
+            head->prev = new_node;
+
+        // Set the new node as the head of linked list
+        head = new_node;
+        return head;
+    }
+
+    Node *curr = head;
+
+    // Traversal the list to find the node before insertion point
+    for (int i = 0; i < pos - 1 && curr != NULL; i++)
+    {
+        curr = curr->next;
+    }
+
+    if (curr == NULL)
+    {
+        cout << "Position is out of bounds: " << endl;
+        delete new_node;
+        return head;
+    }
+
+    new_node->prev = curr;
+    new_node->next = curr->next;
+    curr->next = new_node;
+    if (new_node->next != NULL)
+    {
+        new_node->next->prev = new_node;
+    }
+    return head;
+}
 int main()
 {
 
@@ -158,8 +202,11 @@ int main()
     head->next->next->prev = head->next;
     head->next->next->next = new Node(4);
     head->next->next->next->prev = head->next->next;
+    head->next->next->next->next = new Node(5);
+    head->next->next->next->next->prev = head->next->next->next;
 
     int data = 10;
+    //Index is used as key in before and after insertion to doubly linked list
     int index = 2;
 
     // Print the original list
@@ -169,7 +216,8 @@ int main()
     // cout << "Size of linked list: " << findSize(head);
     // head = insertAtFront(head, data);
     // head = insertAfter(head, index, data);
-    head = insertBefore(head, index, data);
+    // head = insertBefore(head, index, data);
+    head = insertAtPosition(head, index, data);
 
     // After update the linked list
     forwardTraversal(head);
