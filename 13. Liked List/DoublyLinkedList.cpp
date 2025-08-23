@@ -51,6 +51,25 @@ int findSize(Node *head)
     return 1 + findSize(head->next);
 }
 
+// Function to insert a new node at the front of doubly linked list
+Node *insertAtFront(Node *head, int new_data)
+{
+    // Create a new node
+    Node *new_node = new Node(new_data);
+
+    // Make next of new node as head
+    new_node->next = head;
+
+    // Change a prev of head node to new node
+    if (head != NULL)
+    {
+        head->prev = new_node;
+    }
+
+    // Return the new node as the head of the double linked list 
+    return new_node;
+}
+
 int main()
 {
 
@@ -62,9 +81,17 @@ int main()
     head->next->next->next = new Node(4);
     head->next->next->next->prev = head->next->next;
 
-    // forwardTraversal(head);
+    int data = 10;
+
+    // Print the original list
+    forwardTraversal(head);
+
     // backwordTraversal(head->next->next->next);
     // cout << "Size of linked list: " << findSize(head);
+    head = insertAtFront(head, data);
+
+    // After update the linked list
+    forwardTraversal(head);
 
     return 0;
 }
