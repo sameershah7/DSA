@@ -66,8 +66,45 @@ Node *insertAtFront(Node *head, int new_data)
         head->prev = new_node;
     }
 
-    // Return the new node as the head of the double linked list 
+    // Return the new node as the head of the double linked list
     return new_node;
+}
+
+// Function to insert a new node after a given node in doubly linked list
+Node *insertAfter(Node *head, int key, int new_data)
+{
+    Node *curr = head;
+
+    while (curr != nullptr)
+    {
+        if (curr->data == key)
+            break;
+        curr = curr->next;
+    }
+
+    // If the given key is not found
+    if (curr == nullptr)
+        return 0;
+
+    // Create new node
+    Node *new_node = new Node(new_data);
+
+    // Set prev of new node to given node
+    new_node->prev = curr;
+
+    // Set next of new node to the given node
+    new_node->next = curr->next;
+
+    // Update next of given node to new node
+    curr->next = new_node;
+
+    // If the given node is not the last node of the linked list
+    if (new_node->next != nullptr)
+    {
+        new_node->next->prev = new_node;
+    }
+
+    return head;
 }
 
 int main()
@@ -82,13 +119,15 @@ int main()
     head->next->next->next->prev = head->next->next;
 
     int data = 10;
+    int index = 2;
 
     // Print the original list
     forwardTraversal(head);
 
     // backwordTraversal(head->next->next->next);
     // cout << "Size of linked list: " << findSize(head);
-    head = insertAtFront(head, data);
+    // head = insertAtFront(head, data);
+    head = insertAfter(head, index, data);
 
     // After update the linked list
     forwardTraversal(head);
