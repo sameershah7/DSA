@@ -107,6 +107,47 @@ Node *insertAfter(Node *head, int key, int new_data)
     return head;
 }
 
+// Function to insert a new node before a give node in doubly linked list
+Node *insertBefore(Node *head, int key, int new_data)
+{
+    Node *curr = head;
+    while (curr != NULL)
+    {
+        if (curr->data == key)
+            break;
+        curr = curr->next;
+    }
+
+    // If the key is not found
+    if (curr == NULL)
+        return 0;
+
+    // Create a new node
+    Node *new_node = new Node(new_data);
+
+    // Set prev of new node to prev to the given node
+    new_node->prev = curr->prev;
+
+    // Set next of new node to the give node
+    new_node->next = curr;
+
+    // Update next of given node's prev to new node
+    if (new_node->prev != NULL)
+    {
+        new_node->prev->next = new_node;
+    }
+    else
+    {
+        // if the current node is head, update the head
+        head = new_node;
+    }
+
+    // Update prev given node to new node
+    curr->prev = new_node;
+
+    return head;
+}
+
 int main()
 {
 
@@ -127,7 +168,8 @@ int main()
     // backwordTraversal(head->next->next->next);
     // cout << "Size of linked list: " << findSize(head);
     // head = insertAtFront(head, data);
-    head = insertAfter(head, index, data);
+    // head = insertAfter(head, index, data);
+    head = insertBefore(head, index, data);
 
     // After update the linked list
     forwardTraversal(head);
