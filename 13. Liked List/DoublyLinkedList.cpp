@@ -192,6 +192,84 @@ Node *insertAtPosition(Node *head, int pos, int new_data)
     }
     return head;
 }
+
+// Deletes the first node (head) of the list and returns the second node as new head
+Node *delHead(Node *head)
+{
+    if (head == nullptr)
+        return nullptr;
+
+    Node *temp = head;
+
+    head = head->next;
+
+    if (head != nullptr)
+        head->prev = nullptr;
+
+    // free the memory and return head
+    delete temp;
+    return head;
+}
+
+// Function to delete the last node of the doubly linked list
+Node *delLast(Node *head)
+{
+    // corner case
+    if (head == NULL)
+        return NULL;
+    if (head->next == NULL)
+    {
+        delete head;
+        return NULL;
+    }
+
+    // Traverse to the last node
+    Node *curr = head;
+    while (curr->next != NULL)
+        curr = curr->next;
+
+    // Update the previous node's next pointer
+    curr->prev->next = NULL;
+
+    delete curr;
+    return head;
+}
+
+// Function to delete a node at a specific position in the doubly linked list
+Node *delPos(Node *head, int pos)
+{
+    // If the list is empty
+    if (head == NULL)
+        return head;
+
+    Node *curr = head;
+
+    // Traverse to the node at the given position
+    for (int i = 1; curr != NULL && i < pos; ++i)
+    {
+        curr = curr->next;
+    }
+
+    // If the position is out of range
+    if (curr == NULL)
+        return head;
+
+    // Update the previous node's next pointer
+    if (curr->prev != NULL)
+        curr->prev->next = curr->next;
+
+    // Update the next node's prev pointer
+    if (curr->next != NULL)
+        curr->next->prev = curr->prev;
+
+    // Is the node to be deleted is head node
+    if (head == curr)
+        head = curr->next;
+
+    // Deallocate memory for the deleted node
+    delete curr;
+    return head;
+}
 int main()
 {
 
@@ -206,8 +284,8 @@ int main()
     head->next->next->next->next->prev = head->next->next->next;
 
     int data = 10;
-    //Index is used as key in before and after insertion to doubly linked list
-    int index = 2;
+    // Index is used as key in before and after insertion to doubly linked list
+    int index = 4;
 
     // Print the original list
     forwardTraversal(head);
@@ -217,10 +295,20 @@ int main()
     // head = insertAtFront(head, data);
     // head = insertAfter(head, index, data);
     // head = insertBefore(head, index, data);
-    head = insertAtPosition(head, index, data);
+    // head = insertAtPosition(head, index, data);
+    // head = delHead(head);
+    // head = delLast(head);
+    head = delPos(head, index);
 
     // After update the linked list
     forwardTraversal(head);
 
     return 0;
 }
+
+// | Feature               | Array         | Singly Linked List   | Doubly Linked List   |
+// | --------------------- | ------------- | -------------------- | -------------------- |
+// | Memory usage          | Low           | Medium               | High (extra `prev`)  |
+// | Access (random index) | O(1)          | O(n)                 | O(n)                 |
+// | Insertion/Deletion    | Costly (O(n)) | Easy (O(1) if known) | Easy (O(1) if known) |
+// | Traversal direction   | One way       | One way              | Two ways             |
