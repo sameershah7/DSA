@@ -29,19 +29,20 @@ void printList(Node *head)
 // Function to insert a node at a specific position in a circular linked list
 Node *insertAtPosition(Node *head, int data, int pos)
 {
-    if (head == nullptr){
+    if (head == nullptr)
+    {
         // If the list is empty
-        if (pos != 1){
+        if (pos != 1)
+        {
             cout << "Invalid position!" << endl;
             return head;
         }
         // Create a new node and make it point to itself
         Node *newNode = new Node(data);
-        head = newNode;		
+        head = newNode;
         head->next = head;
         return head;
     }
-
 
     // Create a new node with given data
     Node *new_node = new Node(data);
@@ -78,6 +79,58 @@ Node *insertAtPosition(Node *head, int data, int pos)
         head = new_node;
     return head;
 }
+
+// Function to delete a specific node in the circular linked list
+Node *deleteSpecificNode(Node *head, int key)
+{
+    if (head == nullptr)
+    {
+        cout << "The list is empty Nothing to deleted: " << endl;
+         return nullptr;
+    }
+
+    Node *curr = head->next;
+    Node *prev = head;
+
+    // If the node is to be deleted only node
+    if (curr == head && curr->data == key)
+    {
+        delete curr;
+        head = nullptr;
+        return head;
+    }
+
+    // If the node is to be deleted the first node 
+    if(curr->data == key){
+        head->next = curr->next;
+        delete curr;
+        return head;
+    }
+
+    // Traverse the list to find the node to be deleted
+    while (curr != head && curr->data != key)
+    {
+        prev = curr;
+        curr = curr->next;
+    }
+
+    // If the node is deleted to be found 
+    if(curr->data == key){
+            prev->next = curr->next;
+            if(curr == head){
+                head = prev;
+            }
+            delete curr;
+    }
+    else{
+        // The node to be deleted not found 
+        cout<< "Not found ! ";
+    }
+
+    return head;
+    
+}
+
 int main()
 {
     // Initialize the Node
@@ -91,10 +144,12 @@ int main()
     head->next->next->next->next->next = head;
 
     printList(head);
-     int data = 5, pos = 4;
-    head = insertAtPosition(head, data, pos);
+    int data = 5, pos = 4;
+    int key  = 10;
+    // head = insertAtPosition(head, data, pos);
+       head = deleteSpecificNode(head, key);
 
-    cout<<"\n After update: \n";
+    cout << "\n After update: \n";
     printList(head);
 
     return 0;
