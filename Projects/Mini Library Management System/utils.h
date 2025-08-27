@@ -9,3 +9,4 @@ using namespace std;
 void addBook(vector<Book> &library);
 void displayBooks(vector<Book> &library);
 int linearSearch(vector<Book> &library, int id);
+void showLatestBooks(vector<Book> &library );

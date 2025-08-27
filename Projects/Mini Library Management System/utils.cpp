@@ -1,5 +1,6 @@
 #include "utils.h"
 #include <iostream>
+#include <algorithm>
 
 void addBook(vector<Book> &library)
 {
@@ -18,7 +19,6 @@ void addBook(vector<Book> &library)
     cout << "Book added successfully!\n";
 }
 
-
 void displayBooks(vector<Book> &library)
 {
      cout << "Library Collection:\n";
@@ -31,11 +31,14 @@ void displayBooks(vector<Book> &library)
     }
 }
 
-
 int linearSearch(vector<Book>& library, int id) {
     for (int i = 0; i < library.size(); i++) {
         if (library[i].id == id)
             return i;
     }
     return -1;
+}
+
+void showLatestBooks(vector<Book> &library) {
+    reverse(library.begin(), library.end());
 }

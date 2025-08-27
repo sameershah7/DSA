@@ -13,22 +13,25 @@ vector<Book> library = {
     {4, "Design Patterns", "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides", 1994},
     {5, "Introduction to Algorithms", "Thomas H. Cormen", 2009}};
 
-
 int main()
 {
     int choice;
     do
     {
         cout << "\n=== Library Menu ===\n";
+        cout << "0. Exit\n";
         cout << "1. Add Book\n";
         cout << "2. Display Books\n";
         cout << "3. Search by id\n";
-        cout << "4. Exit\n";
+        cout << "4. Show latest book\n";
         cout << "Enter choice: ";
         cin >> choice;
 
         switch (choice)
         {
+        case 0:
+            cout << "Good bye\n";
+            break;
         case 1:
             addBook(library);
             break;
@@ -48,12 +51,13 @@ int main()
             break;
         }
         case 4:
-            cout << "Good bye\n";
+            showLatestBooks(library);
             break;
+
         default:
             cout << "Invalid choice!\n";
         }
-    } while (choice != 4);
+    } while (choice != 0);
 
     return 0;
 }

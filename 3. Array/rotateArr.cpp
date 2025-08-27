@@ -19,7 +19,8 @@ void rotateArr(vector<int> &arr, int d)
 int main()
 {
     vector<int> arr = {1, 2, 3, 4, 5, 6};
-    int d = 2;
+    int d = 3;
+    // This output will be 4 5 6 1 2 3
 
     rotateArr(arr, d);
 
