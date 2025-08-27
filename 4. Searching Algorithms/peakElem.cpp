@@ -42,9 +42,39 @@ int peakElement(vector<int> &arr)
     return 0;
 }
 
+// Function that search binary if element is found return his index
+//  Not found the return -1
+int binarySearch(vector<int> &arr, int key)
+{
+    int low = 0;
+    int high = arr.size() - 1;
+
+    while (low <= high)
+    {
+        int mid = (low + high) / 2;
+
+        if (key == arr[mid])
+        {
+            return mid;
+        }
+
+        if (key > arr[mid])
+        {
+            low = mid + 1;
+        }
+        else
+        {
+            high = mid - 1;
+        }
+    }
+
+    return -1;
+}
+
 int main()
 {
-    vector<int> arr = {1, 2, 4, 5, 7, 8, 3};
-    cout << "index: " << peakElement(arr);
+    vector<int> arr = {1, 2, 4, 5, 10, 7, 8, 3};
+    cout << "index: " << peakElement(arr)<<endl;
+    cout<< binarySearch(arr, 8);
     return 0;
 }
