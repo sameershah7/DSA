@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-//Tree: data structure is a non-linear data structure in which a collection of elements known as nodes are connected to each other via edges such that there exists a path between any two nodes.
+// Tree: data structure is a non-linear data structure in which a collection of elements known as nodes are connected to each other via edges such that there exists a path between any two nodes.
 
 // implement node of binary tree.
 struct Node
@@ -37,7 +37,7 @@ void printInOrder(struct Node *node)
 }
 
 // Function to print postorder traversal
-void printPostorder(struct Node* node)
+void printPostorder(struct Node *node)
 {
     if (node == nullptr)
         return;
@@ -45,6 +45,28 @@ void printPostorder(struct Node* node)
     printPostorder(node->left);
     printPostorder(node->right);
     cout << node->data << " ";
+}
+
+// function to travel preOder to check if node exits
+bool ifNodeExists(Node *node, int key)
+{
+    if (node == nullptr)
+        return false;
+        
+    if (node->data == key)
+    {
+        return true;
+    }
+
+    bool res1 = ifNodeExists(node->left, key);
+    if (res1)
+        return true;
+
+    bool res2 = ifNodeExists(node->right, key);
+    if (res2)
+        return true;
+
+    return false;
 }
 
 int main()
@@ -61,11 +83,15 @@ int main()
     second->right = forth;
     second->left = fifth;
 
-    printPreOrder(firstNode);
-    cout<<endl;
-    printInOrder(firstNode);
-    cout<<endl;
-    printPostorder(firstNode);
-    
+    // printPreOrder(firstNode);
+    // cout << endl;
+    // printInOrder(firstNode);
+    // cout << endl;
+    // printPostorder(firstNode);
+
+    int key = 3;
+
+    ifNodeExists(firstNode, key) ? cout << "True" : cout << "False";
+
     return 0;
 }
