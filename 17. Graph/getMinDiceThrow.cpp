@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <unordered_map>
 using namespace std;
 
 // Function to find the minimum number of dic throws BFS
@@ -38,6 +39,43 @@ int getMinDiceThrowsBFS(vector<int> &move)
     return -1;
 }
 
+// Recursive DFS to explore all paths from current position
+void dfs(int currPos, int movesMade, vector<int> &move, unordered_map<int, int> &visited, int n, int &res)
+{
+    // Prune paths that are worse then already found are visited;
+    if (movesMade >= res || (visited.count(currPos) && movesMade >= visited[currPos]))
+        return;
+
+    // Reached the last cell and update the result
+    if (currPos == n - 1)
+    {
+        res = movesMade;
+        return;
+    }
+    visited[currPos] = movesMade;
+
+    // Explore the dice throw (1 to 6)
+    for (int i = 1; i <= 6 && currPos + i < n; ++i)
+    {
+        int nextPos = currPos + i;
+
+        // Jump if ladder/snake present
+        int dest = (move[nextPos] != -1) ? move[nextPos] : nextPos;
+
+        dfs(dest, movesMade + 1, move, visited, n, res);
+    }
+}
+
+// Function to find the minimum number of dice throws
+int getMinDicThrows(vector<int> &move)
+{
+    int n = move.size();
+    unordered_map<int, int> visited;
+    int res = INT_MAX;
+    // Start DFS from cell 0
+    dfs(0, 0, move, visited, n, res);
+    return (res == INT_MAX) ? -1 : res;
+}
 
 int main()
 {
