@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 int nthFibonacci(int n){
@@ -22,8 +23,28 @@ int nthFibonacci(int n){
     return  curr;   
 }
 
+// Bottom-Up approach
+int fibBottomUp(int n){
+    if( n <= 1) return n;
+
+    // vector to store fibonacci number
+    vector<int> dp(n + 1);
+
+    //Initialize the first two fib num
+    dp[0] = 0;
+    dp[1] = 1;
+
+    // Filling the vector iteratively
+    for (int i = 2; i <= n; ++i)
+        dp[i] = dp[i - 1] + dp[i - 2];
+
+    // Return nthFib num
+    return dp[n];
+}
+
 int main(){
     int n = 15;
     int result  = nthFibonacci(n);
+    result = fibBottomUp(n); 
     cout<<result;
 }
