@@ -29,10 +29,46 @@ int countWays(string &digits)
     return dp[0];
 }
 
+// Using Space Optimised DP
+int countWaysDP(string &digits)
+{
+    int n = digits.size();
+
+    if (n == 0 || digits[0] == '0')
+        return 0;
+
+    // Two variable to store the previous results
+    int prev1 = 1, prev2 = 0;
+
+    for (int i = 0; i <= n; i++)
+    {
+        int curr = 0;
+
+        if (digits[i - 1] != '0')
+            curr += prev1;
+
+        // Checking for valid two-digit decoding
+        // (prev digit and current digit from a valid number b/w 10 to 26)
+        if (i > 1)
+        {
+            int twoDigit = (digits[i - 2] - '0') * 10 + (digits[i - 1] - '0');
+            if (twoDigit >= 10 && twoDigit <= 26)
+            {
+                curr += prev2;
+            }
+        }
+        // Update prev1 and prev2 for the next iteration.
+        prev2 = prev1;
+        prev1 = curr;
+    }
+    return prev1;
+}
+
 int main()
 {
-    string digits = "12123";
+    string digits = "121232";
     cout << countWays(digits) << endl;
+    cout<<countWaysDP(digits)<<endl;
 
     return 0;
 }
